@@ -25,3 +25,14 @@ Once you've set environment variables, you can run the server as follows
 ```
 ./start_server.sh
 ```
+
+## Deploying
+At first, you must set Heroku as a remote branch
+```
+heroku git:remote -a explainable
+```
+
+Then, you can push to production:
+```
+git push heroku master
+```
