@@ -1,0 +1,13 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = 'Jedi-Temple'
+
+[packages]
+
+flask = ">=1.1.1"
+
+[requires]
+
+python_version = "3.7.4"
