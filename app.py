@@ -15,9 +15,12 @@ def pic_model_1(data):
 def word_model_1(data):
     return "The house should cost one million dollars"
 
+WORD = 0
+PICTURE = 1
+
 models = {
-    "PICTURE_MODEL1": (is_picture, pic_model_1),
-    "WORD_MODEL1"   : (is_word_data, word_model_1)
+    "PICTURE_MODEL1": (PICTURE, pic_model_1),
+    "WORD_MODEL1"   : (WORD, word_model_1)
 }
 
 @app.route('/')
@@ -29,10 +32,15 @@ def hello():
 def mlmodel():
     args = request.args
     which_model = args.get("model", "not_a_model")
-    test_data = args.get("data", "invalid_data")
     if which_model not in models:
         return '', 418
-    (input_valid_func, model_func) = models[which_model]
-    if not input_valid_func(test_data):
-        return '', 400
+    (model_type, model_func) = models[which_model]
+    if model_type == WORD:
+        test_data = args.get("data", "invalid_data")
+        if not is_word_data(test_data):
+            return '', 400
+    if model_type == PICUTRE:
+        image_file = request.files['image']
+        if not is_picture(image_file)
+            return '', 400
     return model_func(test_data), 200
