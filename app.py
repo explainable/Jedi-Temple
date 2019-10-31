@@ -1,10 +1,19 @@
-from flask import Flask, escape, request, jsonify
+from flask import Flask, escape, request, jsonify, render_template, send_file
+from werkzeug.utils import secure_filename
+import os
+
+UPLOAD_FOLDER = 'uploaded_images';
+ALLOWED_EXTENSIONS = {'png'}
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+def allowed_file(filename):
+    return '.' in filename and \
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def is_picture(data):
-    return data == '1'
+    return True
 
 def is_word_data(data):
     return data == '2'
@@ -25,22 +34,30 @@ models = {
 
 @app.route('/')
 def hello():
-    name = request.args.get("name", "World")
-    return 'Hello, {escape(name)}!'
+    #name = request.args.get("name", "World")
+    return render_template('index.html')
 
-@app.route('/mlmodel')
+@app.route('/mlmodel', methods = ['POST', 'GET'])
 def mlmodel():
     args = request.args
-    which_model = args.get("model", "not_a_model")
+    which_model = args.get("model", "PICTURE_MODEL1")
     if which_model not in models:
         return '', 418
     (model_type, model_func) = models[which_model]
     if model_type == WORD:
-        test_data = args.get("data", "invalid_data")
+        image_file = args.get("data", "invalid_data")
         if not is_word_data(test_data):
             return '', 400
-    if model_type == PICUTRE:
-        image_file = request.files['image']
-        if not is_picture(image_file)
-            return '', 400
+    if model_type == PICTURE:
+        image_file = request.files['pic']
+        if not is_picture(image_file):
+            return '', 410
+        if image_file.filename == '':
+            return '', 401
+        if image_file and allowed_file(image_file.filename):
+            filename = secure_filename(image_file.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            image_file.save(filepath)
+            return send_file(filepath)
+        return '', 402
     return model_func(test_data), 200
