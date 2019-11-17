@@ -6,7 +6,13 @@ from mnist_cnn import get_info
 UPLOAD_FOLDER = 'uploaded_images';
 ALLOWED_EXTENSIONS = {'png'}
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='', 
+            static_folder='templates', # should this have a different name?
+            #template_folder='web/templates'    ) # do we want templates?
+            )
+
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
