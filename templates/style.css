@@ -1,12 +1,51 @@
-h1 {
-	text-align: center;
-	color: YELLOW;
+/* BLUE: #273054 */
+/* RED: #F20000 */
+/* LIGHT BLUE: #059BBB */
+/* LIGHT GREY: #979797 */
+/* BLACK: #131313 */
+
+body {
+  padding: 0;
+  margin: 0;
+  background: #131313;
+}
+/*--- navigation bar ---*/
+.navbar {
+  background:#273054;
+}
+.nav-link,
+.navbar-brand {
+  color: #059BBB;
+  cursor: pointer;
+}
+.nav-link {
+  margin-right: 1em !important;
+}
+.nav-link:hover {
+  color: #979797;
+}
+.navbar-collapse {
+  justify-content: flex-end;
 }
 
-body { 
-	background-color: GREEN;
+.page-footer {
+  color: #979797;
+  padding: 50px;
+  margin: 20px;
 }
 
-div {
+.centered {
+	color: #979797;
 	text-align: center;
+	padding: 70px;
+	margin: 20px;
+}
+
+.text-container {
+	background-color: #979797;
+	color: #131313;
+	text-align: center;
+	padding: 70px;
+	font-size: 20px;
+	margin: 20px;
 }
