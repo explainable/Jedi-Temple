@@ -4,8 +4,8 @@ verify_ssl = true
 name = 'Jedi-Temple'
 
 [packages]
+Jedi_Academy_Explainable = {path = "../Jedi-Academy"}
 flask = ">=1.1.1"
 gunicorn = "*"
+tensorflow = "<=1.14"
 
-[requires]
-python_version = "3.7.4"

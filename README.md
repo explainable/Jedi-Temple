@@ -9,6 +9,7 @@ To install dependencies, run
 ```
 pipenv install
 ```
+Note: Currently this requires the Jedi-Academy repo to be in the same directory as this repo
 
 To begin a session, run
 ```
