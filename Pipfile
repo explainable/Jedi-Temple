@@ -4,7 +4,7 @@ verify_ssl = true
 name = 'Jedi-Temple'
 
 [packages]
-Jedi_Academy_Explainable = {path = "../Jedi-Academy"}
+Jedi_Academy_Explainable = {git = "https://github.com/explainable/Jedi-Academy.git"}
 flask = ">=1.1.1"
 gunicorn = "*"
 tensorflow = "<=1.14"
