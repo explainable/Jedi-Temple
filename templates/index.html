@@ -1,69 +1,202 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 	<head>
 		<title>ExplAInable</title>
  		<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<!-- NAVBAR -->
-		<nav class="navbar navbar-expand-md navbar-static-top">
-		  <a class="navbar-brand" href="#">ExplAInable</a>
-		  <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="main-navigation">
-		    <ul class="navbar-nav">
-		      <li class="nav-item">
-		        <a class="nav-link" href="index.html">Home</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="about.html">About</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="works.html">How it Works</a>
-		      </li>
-		    </ul>
-		  </div>
-		</nav>
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-md navbar-static-top">
+	  <a class="navbar-brand" href="#">ExplAInable</a>
+	  <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="main-navigation">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="index.html">Home</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="about.html">About</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="works.html">How it Works</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
 
-		<header class="page-header header container-fluid">
-			<div class="centered"><h1>Welcome to ExplAInable!</h1></div>
-			<div class="text-container">
-				EXAMPLE DATA GRAPHIC TO GO HERE
-			</div>
-			<div class="text-container">
-				Txt to quickly explain the above graphic and context
-			</div>
-			<div class="text-container">
-				<form action="/mlmodel?model=PICTURE_MODEL1" method="post" enctype=multipart/form-data> 
-	  				<input type="file" name="pic" accept="image/*">
-	  				<input type="submit">
-				</form>
-			</div>	
-		</header>
 
-		<footer class="page-footer">
-		  <div class="container">
-		    <div class="row">
-		      <div class="col-lg-8 col-md-8 col-sm-12">
-		      <p>This projct was started in Fall of 2019 at Tufts University.</p>
-		      <p>Project is being completed for the Capstone class.</p>
+	<header class="header hero masthead bg-primary-gradient text-center m-0 p-0">
+		<div class="masthead-content">
+			<div class="masthead-heading"><h1>ExplAInable</h1></div>
+			<!-- Icon Divider -->
+		    <div class="divider-custom divider-light">
+		        <div class="divider-custom-line"></div>
+		        <div class="divider-custom-icon">
+		          <i class="fas fa-lightbulb"></i>
+		        </div>
+		        <div class="divider-custom-line"></div>
 		    </div>
-		    <div class="col-lg-4 col-md-4 col-sm-12">
-		      <h6 class="text-uppercase font-weight-bold">Contact Us</h6>
-		      <br/>Sebastian Coates: sebastian.coates@tufts.edu
-		      <br/>Aidan Fike: aidan.fike@tufts.edu
-		      <br/>Logan Herodes: logan.herodes@tufts.edu
-		      <br/>Mikayla Rose: mikayla.rose@tufts.edu
-		      <br/>John Tagliaferro: john.tagliaferro@tufts.edu
-		      <br/>Olivia Wentzell: olivia.wentzell@tufts.edu
-		    </div>
-		  </div>
-		</footer>
+		    <div class="masthead-subheading"><h2>Demystifying Artificial Intelligence</h2></div>
+
+			<img class="" src="/img/undraw_chat_bot.svg" alt="Undraw Chatbot">
+      	</div>
+	</header>
+
+	<section class="page-section container-fluid">
+		<div class="text-container">
+			EXAMPLE DATA GRAPHIC TO GO HERE
+		</div>
+		<div class="text-container">
+			Txt to quickly explain the above graphic and context
+		</div>
+	</section>
+	<section class="page-section container-fluid">
+		<div class="text-container">
+			<form action="/mlmodel?model=PICTURE_MODEL1" method="post" enctype=multipart/form-data> 
+  				<input type="file" name="pic" accept="image/*">
+  				<input type="submit">
+			</form>
+		</div>	
+	</section>
+
+	<section class="page-section">
+	<div class="row text-center">
+		<div class="col-lg-1 col-md-1 col-1"></div>	    
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/0.png" alt="Handwritten 0">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/1.png" alt="Handwritten 1">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/2.png" alt="Handwritten 2">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/3.png" alt="Handwritten 3">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/4.png" alt="Handwritten 4">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/5.png" alt="Handwritten 5">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/6.png" alt="Handwritten 6">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	           <img class="img-fluid img-thumbnail" src="/img/7.png" alt="Handwritten 7">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/8.png" alt="Handwritten 8">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/9.png" alt="Handwritten 9">
+	          </a>
+	    </div>
+	</div>
+	</section>
+
+	<section class="page-section">
+	<div class="row text-center">
+		<div class="col-lg-1 col-md-1 col-1"></div>	    
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/0_heatmap.png" alt="Handwritten 0 heatmap">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/1_heatmap.png" alt="Handwritten 1 heatmap">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/2_heatmap.png" alt="Handwritten 2 heatmap">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/3_heatmap.png" alt="Handwritten 3 heatmap">
+	          </a>
+	    </div>
+	    <div class="col-lg-1 col-md-2 col-2">
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/4_heatmap.png" alt="Handwritten 4 heatmap">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/5_heatmap.png" alt="Handwritten 5 heatmap">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/6_heatmap.png" alt="Handwritten 6 heatmap">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/7_heatmap.png" alt="Handwritten 7 heatmap">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/8_heatmap.png" alt="Handwritten 8 heatmap">
+	          </a>
+	    </div>
+	    <div class="d-none d-lg-block col-lg-1"> <!-- hide on small screens -->
+	      <a href="" class="d-block mb-4 h-100">
+	            <img class="img-fluid img-thumbnail" src="/img/9_heatmap.png" alt="Handwritten 9 heatmap">
+	          </a>
+	    </div>
+	</div>
+	</section>
+
+	<footer class="page-footer">
+  <div class="container">
+	    <div class="row">
+	      <div class="col-lg-8 col-md-8 col-sm-12">
+	      <p>This projct was started in Fall of 2019 at Tufts University.</p>
+	      <p>Project is being completed for the Capstone class.</p>
+	    </div>
+	    <div class="col-lg-4 col-md-4 col-sm-12">
+	      <h6 class="text-uppercase font-weight-bold">Contact Us</h6>
+	      <br/>Sebastian Coates: sebastian.coates@tufts.edu
+	      <br/>Aidan Fike: aidan.fike@tufts.edu
+	      <br/>Logan Herodes: logan.herodes@tufts.edu
+	      <br/>Mikayla Rose: mikayla.rose@tufts.edu
+	      <br/>John Tagliaferro: john.tagliaferro@tufts.edu
+	      <br/>Olivia Wentzell: olivia.wentzell@tufts.edu
+	    </div>
+	  </div>
+	</div>
+	</footer>
 
 		<!-- <nav class="navbar sticky-top navbar-dark bg-dark">
 		  <a class="navbar-brand">
@@ -72,9 +205,10 @@
 		  </a>
 		</nav> -->
 
+
 		
 
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	</body>
 </html>
