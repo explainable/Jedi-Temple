@@ -59,11 +59,13 @@
 	</section>
 	<section class="page-section container-fluid">
 		<div class="text-container">
-			<form action="/mlmodel?model=PICTURE_MODEL1" method="post" enctype=multipart/form-data> 
-  				<input type="file" name="pic" accept="image/*">
+			<form id="image-upload" action="/mlmodel?model=PICTURE_MODEL1" method="post" enctype=multipart/form-data> 
+  				<input id="image-file" type="file" name="pic" accept="image/*">
   				<input type="submit">
 			</form>
 		</div>	
+		<img id="original-display" class="hidden" src="", alt="Generated Heatmap">
+		<img id="heatmap-display" class="hidden" src="", alt="Generated Heatmap">
 	</section>
 
 	<section class="page-section">
@@ -205,10 +207,23 @@
 		  </a>
 		</nav> -->
 
-
+	<!-- loading modal -->
+	<div class="modal fade mt-5" id="loading-modal" tabindex="-1" role="dialog" aria-labelledby="loading-modal">   
+	    <div class="modal-dialog modal-sm" role="document">
+	      <div class="modal-content">
+	        <div class="modal-body text-center">
+	          <div class="loader"></div>
+	          <div class="loader-txt">
+	            <h5 id="loader-maintext"></h5><p id="loader-subtext"></p>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
 		
-
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="/utils.js"></script>
+	<script src="/index.js"></script>
 	</body>
 </html>

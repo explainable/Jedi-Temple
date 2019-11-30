@@ -7,10 +7,10 @@ UPLOAD_FOLDER = 'uploaded_images';
 ALLOWED_EXTENSIONS = {'png'}
 
 app = Flask(__name__,
-            static_url_path='', 
-            static_folder='templates', # should this have a different name?
-            #template_folder='web/templates'    ) # do we want templates?
-            )
+    static_url_path='', 
+    static_folder='templates', # should this have a different name?
+    #template_folder='web/templates'    ) # do we want templates?
+)
 
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -48,7 +48,7 @@ def hello():
 def random_thing():
     return "128"
 
-@app.route('/mlmodel', methods = ['POST', 'GET'])
+@app.route('/mlmodel', methods = ['POST'])
 def mlmodel():
     args = request.args
     which_model = args.get("model", "PICTURE_MODEL1")
@@ -67,10 +67,11 @@ def mlmodel():
             return '', 401
         if image_file and allowed_file(image_file.filename):
             filename = secure_filename(image_file.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], random_thing() + filename)
+            filepath = os.path.join("templates", "img", "generated_heatmaps", random_thing() + filename)
             image_file.save(filepath)
             ret_file = model_func(filepath)
-            print(ret_file)
-            return send_file(ret_file)
+            #return send_file(ret_file)
+            return jsonify({"original": filepath, "heatmap": ret_file})
+
         return '', 402
     return model_func(test_data), 200
