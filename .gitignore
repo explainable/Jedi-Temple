@@ -2,4 +2,5 @@
 **__pycache__
 **.DS_Store
 **set_vars.sh
-**.png
+**uploaded_images/*.png
+**templates/img/generated_heatmaps/*.png
