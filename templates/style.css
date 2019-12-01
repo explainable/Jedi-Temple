@@ -12,7 +12,7 @@ html, body {
 }
 
 body {
-  background: #111111;
+  background: linear-gradient(to right, #dddddd, #ffffff);
 }
 /*--- navigation bar ---*/
 .navbar {
@@ -31,6 +31,10 @@ body {
 }
 .navbar-collapse {
   justify-content: flex-end;
+}
+
+.navbar-shadow {
+  box-shadow: 0 1px 8px 5px rgba(0,0,0,.3);
 }
 
 .header {
@@ -118,7 +122,7 @@ body {
 }
 
 .page-footer {
-  color: #555555;
+  color: #232323;
   padding-top: 25px;
   padding-bottom: 25px;
   margin-top: 20px;
@@ -175,6 +179,16 @@ body {
 }
 
 
+.btn-primary {
+  background-color: #059BBB;
+  border-color: #059BBB;
+}
+
+.btn-primary:hover {
+  background-color: white;
+  color: #037aaa;
+}
+
 /** MODAL STYLING **/
 .modal-content {
   border-radius: 0px;
@@ -196,3 +210,38 @@ body {
   } 
 }
 /* End Modal loader */
+
+
+.card {
+  background-color: rgba(240, 240, 240, 1);
+}
+
+.fa-primary {
+  color: #059BBB;
+}
+
+#drop-icon {
+  padding: 3rem;
+  border-style: dotted;
+  border-radius: 10px;
+}
+
+#drop-icon.drop-active {
+  padding: 3rem;
+  border-style: solid;
+  /*background-color: #90ee90;*/
+  background-color: #aaaaaa;
+  /*border-color: #555555;*/
+  border-radius: 10px;
+}
+
+#drop-icon.dropped {
+  padding: 3rem;
+  border-style: dotted;
+  background-color: none;
+  border-radius: 10px;
+  /*border-color: #00c301;
+  color:#90ee90;*/
+}
+
+

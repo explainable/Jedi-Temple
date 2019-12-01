@@ -11,8 +11,8 @@
 	</head>
 	<body>
 	<!-- NAVBAR -->
-	<nav class="navbar navbar-expand-md navbar-static-top">
-	  <a class="navbar-brand" href="#">ExplAInable</a>
+	<nav class="navbar navbar-expand-md fixed-top navbar-shadow">
+	  <a class="navbar-brand" href="/">ExplAInable</a>
 	  <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -49,28 +49,74 @@
       	</div>
 	</header>
 
-	<section class="page-section container-fluid">
+	<!--section class="page-section container-fluid">
 		<div class="text-container">
 			EXAMPLE DATA GRAPHIC TO GO HERE
 		</div>
 		<div class="text-container">
 			Txt to quickly explain the above graphic and context
 		</div>
-	</section>
-	<section class="page-section container-fluid">
-		<div class="text-container">
-			<form id="image-upload" action="/mlmodel?model=PICTURE_MODEL1" method="post" enctype=multipart/form-data> 
-  				<input id="image-file" type="file" name="pic" accept="image/*">
-  				<input type="submit">
-			</form>
-		</div>	
-		<img id="original-display" class="hidden" src="", alt="Generated Heatmap">
-		<img id="heatmap-display" class="hidden" src="", alt="Generated Heatmap">
+	</section-->
+
+	<section class="page-section container-fluid" id="image-section">
+			
+		<div class="col-12 my-5">
+	    <div class="card border-left-info shadow h-100 py-2">
+		    <div class="card-body" id="image-dropzone">
+		      	<h2>Image Processing</h2>
+		      	<div id="heatmap-selection" class="row">
+		      		<div class="col-6">
+					<form id="image-upload" action="/mlmodel?model=PICTURE_MODEL1" method="post" enctype=multipart/form-data> 
+						<div class="form-group">
+						    <label for="image-model-selector" width="50%">Model Selector</label>
+						    <select class="form-control w-50" id="image-model-selector">
+						      <option>MNIST (CNN)</option>
+						      <option>EXAMPLE MODEL 2</option>
+						    </select>
+						 </div>
+						 <div class="form-group">
+						    <label for="image-file" width="50%">Image Input</label><br>
+						    <input id="image-file" type="file" name="pic" accept="image/*" class="mb-2">
+						 </div>
+		  				<button type="submit" class="btn btn-primary">Generate Heatmaps</button>
+					</form>
+					</div>
+
+					<div class="d-none d-sm-block col-sm-6 drop-indicator text-center my-auto" id="drop-box">		
+						<i class="fa fa-file-upload fa-6x fa-primary" id="drop-icon"></i>
+						<h6 class="mt-2" id="file-drop-message">Drag & Drop</h6>
+					</div>
+				</div>
+
+				<hr class="mt-4 hidden" id="heatmap-separator">  
+				<div class="row text-center hidden" id="heatmaps">  
+					<div class="col-12"> 
+					<h3 id="image-model-prediction">Model Prediction: </h3> <br>
+					</div>
+
+					<div class="col-sm-6"> 
+					<h4>Input Image</h4>
+					<img id="original-display" class="img-fluid img-thumbnail" width="50%" src="/img/generated_heatmaps/1281280.png", alt="Generated Heatmap">
+					<p class="mt-1">This is the input image. The prediction indicates which type of image the model sees.</p>
+					</div>
+
+					<div class="col-sm-6"> 
+					<h4>Image Heatmap</h4>
+					<img id="heatmap-display" class="img-fluid img-thumbnail" width="50%" src="/img/generated_heatmaps/1281280.png", alt="Generated Heatmap">
+					<p class="mt-1">This heatmap indicates which pixels in the image were most important when making the prediction.</p>
+					</div>
+				</div>
+		    </div>
+		</div>
+		
 	</section>
 
 	<section class="page-section">
+	<h2 class='text-center pb-2'>Sample Inputs and Heatmaps</h2>
+	
 	<div class="row text-center">
-		<div class="col-lg-1 col-md-1 col-1"></div>	    
+		<div class="col-lg-1 col-md-1 col-1"></div>
+
 	    <div class="col-lg-1 col-md-2 col-2">
 	      <a href="" class="d-block mb-4 h-100">
 	            <img class="img-fluid img-thumbnail" src="/img/0.png" alt="Handwritten 0">
@@ -180,21 +226,24 @@
 	</div>
 	</section>
 
+
 	<footer class="page-footer">
-  <div class="container">
+	<hr class="mt-4">
+
+  	<div class="container">
 	    <div class="row">
 	      <div class="col-lg-8 col-md-8 col-sm-12">
-	      <p>This projct was started in Fall of 2019 at Tufts University.</p>
-	      <p>Project is being completed for the Capstone class.</p>
+	      <p>Explainable was started in Fall of 2019 at Tufts University.</p>
+	      <p>This is being completed for the Senior Capstone class.</p>
 	    </div>
 	    <div class="col-lg-4 col-md-4 col-sm-12">
 	      <h6 class="text-uppercase font-weight-bold">Contact Us</h6>
-	      <br/>Sebastian Coates: sebastian.coates@tufts.edu
-	      <br/>Aidan Fike: aidan.fike@tufts.edu
-	      <br/>Logan Herodes: logan.herodes@tufts.edu
-	      <br/>Mikayla Rose: mikayla.rose@tufts.edu
-	      <br/>John Tagliaferro: john.tagliaferro@tufts.edu
-	      <br/>Olivia Wentzell: olivia.wentzell@tufts.edu
+	      Sebastian Coates: sebastian.coates@tufts.edu
+	      <br>Aidan Fike: aidan.fike@tufts.edu
+	      <br>Logan Herodes: logan.herodes@tufts.edu
+	      <br>Mikayla Rose: mikayla.rose@tufts.edu
+	      <br>John Tagliaferro: john.tagliaferro@tufts.edu
+	      <br>Olivia Wentzell: olivia.wentzell@tufts.edu
 	    </div>
 	  </div>
 	</div>

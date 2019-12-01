@@ -25,7 +25,7 @@ def gen_heatmap(model, image, filename, adv=False):
 
     i = Image.fromarray(scaled, mode="L")
     i.save(filename)
-    return filename
+    return filename, target
 
 
 

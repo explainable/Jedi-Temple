@@ -69,9 +69,13 @@ def mlmodel():
             filename = secure_filename(image_file.filename)
             filepath = os.path.join("templates", "img", "generated_heatmaps", random_thing() + filename)
             image_file.save(filepath)
-            ret_file = model_func(filepath)
+            ret_file, prediction = model_func(filepath)
             #return send_file(ret_file)
-            return jsonify({"original": filepath, "heatmap": ret_file})
+            return jsonify({
+                "original": filepath, 
+                "heatmap": ret_file,
+                "prediction": str(prediction)
+            })
 
         return '', 402
     return model_func(test_data), 200
