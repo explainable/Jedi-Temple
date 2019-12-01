@@ -39,54 +39,56 @@ $(document).ready(function() {
     });
 
     $('#image-dropzone').on(
-            'dragover',
-            function(e) {
-                $("#drop-icon").addClass('drop-active');
-                $("#file-drop-message").text('Drop to Select Image');
+        'dragover',
+        function(e) {
+            $("#drop-icon").addClass('drop-active');
+            $("#file-drop-message").text('Drop to Select Image');
 
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        )
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    )
 
-        $('#image-dropzone').on(
-            'dragleave',
-            function(e) {
+    $('#image-dropzone').on(
+        'dragleave',
+        function(e) {
+            $("#drop-icon").removeClass('drop-active');
+            $("#drop-icon").removeClass('dropped');
+            $("file-drop-message").text("Drag & Drop")
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    )
+
+    $('#image-dropzone').on(
+        'dragenter',
+        function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    )
+
+    $('#image-dropzone').on('drop',
+        function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+                $('#image-file').prop("files", e.originalEvent.dataTransfer.files) 
                 $("#drop-icon").removeClass('drop-active');
-                $("#drop-icon").removeClass('dropped');
-                $("file-drop-message").text("Drag & Drop")
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        )
+                $("#drop-icon").addClass('dropped');
+                let filename = e.originalEvent.dataTransfer.files[0].name
+                let l = filename.length
+                if (l > 20) {
 
-        $('#image-dropzone').on(
-            'dragenter',
-            function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        )
-
-        $('#image-dropzone').on('drop',
-            function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                
-                if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
-                    $('#image-file').prop("files", e.originalEvent.dataTransfer.files) 
-                    $("#drop-icon").removeClass('drop-active');
-                    $("#drop-icon").addClass('dropped');
-                    let filename = e.originalEvent.dataTransfer.files[0].name
-                    let l = filename.length
-                    if (l > 20) {
-
-                        filename = filename.substring(0, 8) + "..." + filename.substring(l-8, l)
-                    }
-                    $("#file-drop-message").text(filename + ' Selected!');
+                    filename = filename.substring(0, 8) + "..." + filename.substring(l-8, l)
                 }
+                $("#file-drop-message").text(filename + ' Selected!');
             }
-        )
+        }
+    )
+
+    plot_regression()
 
     /* For adding navbar shadow on scroll ... remove the class from html first
     $(window).scroll(function() {     
@@ -99,3 +101,64 @@ $(document).ready(function() {
       }
     }); */
 })
+
+function plot_regression() {
+    let reg_features = [
+        "CRIM",   
+        "ZN",   
+        "INDUS",  
+        "CHAS",  
+        "NOX",    
+        "RM",     
+        "AGE",    
+        "DIS",    
+        "RAD",    
+        "TAX",    
+        "PTRATIO",
+        "B",      
+        "LSTAT"   
+    ]
+    let reg_descriptions = [
+        "Per capita crime rate by town",
+        "Proportion of residential land zoned for lots over 25,000 sq.ft.",
+        "Proportion of non-retail business acres per town",
+        "Bounds Charles River",
+        "Nitric oxides concentration (parts per 10 million)",
+        "Average number of rooms per dwelling",
+        "Proportion of owner-occupied units built prior to 1940",
+        "Weighted distances to five Boston employment centres",
+        "Index of accessibility to radial highways",
+        "Full-value property-tax rate per $10,000",
+        "Pupil-teacher ratio by town",
+        "Proportion of black residents",
+        "Percent 'lower' status of the population"
+    ]
+    let weights = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+    var reg_data = [{
+      x: reg_features,
+      y: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+      type: 'bar',
+      text: reg_descriptions,
+    }];
+
+    var layout = {
+      title: 'Feature Significance for Boston Housing Data',
+      font:{
+        family: 'Raleway, sans-serif'
+      },
+      showlegend: false,
+      xaxis: {
+        tickangle: -45
+      },
+      yaxis: {
+        zeroline: false,
+        gridwidth: 2
+      },
+      bargap :0.05,
+      autosize: true,
+    };
+
+
+    Plotly.newPlot('regression-bar-chart', reg_data, layout);
+}
