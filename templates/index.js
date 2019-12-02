@@ -84,6 +84,10 @@ $(document).ready(function() {
                     filename = filename.substring(0, 8) + "..." + filename.substring(l-8, l)
                 }
                 $("#file-drop-message").text(filename + ' Selected!');
+            } else {
+                $("#drop-icon").removeClass('drop-active');
+                $("#drop-icon").removeClass('dropped');
+                $("file-drop-message").text("Drag & Drop")
             }
         }
     )

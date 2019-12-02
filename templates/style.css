@@ -27,7 +27,8 @@ body {
   /*margin-right: 1em !important;*/
 }
 .nav-link:hover {
-  color: #979797;
+  color: #dddddd;
+  /*color: #979797;*/
 }
 .navbar-collapse {
   justify-content: flex-end;
