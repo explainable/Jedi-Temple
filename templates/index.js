@@ -100,6 +100,21 @@ $(document).ready(function() {
           $(".navbar").removeClass("navbar-shadow");
       }
     }); */
+    /* Update slider text */
+    $("#CRIM").on("change", (e) => {$("#CRIM-value").text($("#CRIM").val()); plot_regression()})
+    $("#ZN").on("change", (e) => {$("#ZN-value").text($("#ZN").val()); plot_regression()})
+    $("#INDUS").on("change", (e) => {$("#INDUS-value").text($("#INDUS").val()); plot_regression()})
+    $("#NOX").on("change", (e) => {$("#NOX-value").text($("#NOX").val()); plot_regression()})
+    $("#RM").on("change", (e) => {$("#RM-value").text($("#RM").val()); plot_regression()})
+    $("#AGE").on("change", (e) => {$("#AGE-value").text($("#AGE").val()); plot_regression()})
+    $("#DIS").on("change", (e) => {$("#DIS-value").text($("#DIS").val()); plot_regression()})
+    $("#RAD").on("change", (e) => {$("#RAD-value").text($("#RAD").val()); plot_regression()})
+    $("#TAX").on("change", (e) => {$("#TAX-value").text($("#TAX").val()); plot_regression()})
+    $("#PTRATIO").on("change", (e) => {$("#PTRATIO-value").text($("#PTRATIO").val()); plot_regression()})
+    $("#B").on("change", (e) => {$("#B-value").text($("#B").val()); plot_regression()})
+    $("#LSTAT").on("change", (e) => {$("#LSTAT-value").text($("#LSTAT").val()); plot_regression()})
+    $("#CHAS").on("change", (e) => {plot_regression()})
+    $(window).resize(function(){plot_regression()}) /* keeps plot centered and appropriately sized */
 })
 
 function plot_regression() {
@@ -126,7 +141,7 @@ function plot_regression() {
         "Nitric oxides concentration (parts per 10 million)",
         "Average number of rooms per dwelling",
         "Proportion of owner-occupied units built prior to 1940",
-        "Weighted distances to five Boston employment centres",
+        "Weighted distances to five Boston employment centers",
         "Index of accessibility to radial highways",
         "Full-value property-tax rate per $10,000",
         "Pupil-teacher ratio by town",
@@ -135,15 +150,40 @@ function plot_regression() {
     ]
     let weights = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
+    let chas = 0; 
+    if ($("#CHAS option:selected").val() == "YES") chas = 1
+
+    let crim = $("#CRIM").val()
+    let zn = $("#ZN").val()
+    let indus = $("#INDUS").val()
+    let nox = $("#NOX").val()
+    let rm = $("#RM").val()
+    let age = $("#AGE").val()
+    let dis = $("#DIS").val()
+    let rad = $("#RAD").val()
+    let tax = $("#TAX").val()
+    let ptratio = $("#PTRATIO").val()
+    let b = $("#B").val()
+    let lstat = $("#LSTAT").val()
+    /* VALIDATE THESE FIRST */
+
+    values = [chas, crim, zn, indus, nox, rm, age, dis, rad, tax, ptratio, b, lstat]
+
+    let contributions = []
+    for (let i=0; i < weights.length; i++) {
+        contributions.push(values[i] * weights[i])
+    }
+
     var reg_data = [{
       x: reg_features,
-      y: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+      y: contributions,
       type: 'bar',
       text: reg_descriptions,
+      marker: {color: "#059BBB"},
     }];
 
     var layout = {
-      title: 'Feature Significance for Boston Housing Data',
+      title: 'Feature Significance for Regression',
       font:{
         family: 'Raleway, sans-serif'
       },
@@ -153,12 +193,19 @@ function plot_regression() {
       },
       yaxis: {
         zeroline: false,
+        title: "Contribution",
         gridwidth: 2
       },
       bargap :0.05,
       autosize: true,
     };
 
+    prediction = 0
+    for (let c of contributions) {
+        prediction += c
+    }
+
+    $("#regression-prediction").text("Predicting House Price: $" + prediction.toFixed(2))
 
     Plotly.newPlot('regression-bar-chart', reg_data, layout);
 }

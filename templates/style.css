@@ -244,4 +244,22 @@ body {
   color:#90ee90;*/
 }
 
+input[type=range]::-webkit-slider-thumb {
+    background: #059BBB;
+}
+input[type=range]::-moz-range-thumb {
+    background: #059BBB;
+}
+input[type=range]::-ms-thumb {
+    background: #059BBB;
+}
 
+.select-offset {
+  padding-top: 78px;
+}
+
+@media (max-width: 576px) { 
+  .select-offset {
+    padding-top: 0px;
+  }
+}

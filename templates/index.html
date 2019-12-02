@@ -226,22 +226,112 @@
 	</div>
 	</section>
 
-
-
-
-
 	<section class="page-section container-fluid" id="regression-section">
 			
 		<div class="col-12 my-5">
 	    <div class="card border-left-info shadow h-100 py-2">
 		    <div class="card-body" id="image-dropzone">
 		      	<h2>Regression</h2>
-		      	<div id="" class="row">
-		      		<div class="col-sm-6">
-					
+		      	<div class="row">
+		      		<div class="col-12">
+						<div class="form-group">
+						    <label for="regression-model-selector" width="50%">Model Selector</label>
+						    <select class="form-control w-25" id="regression-model-selector">
+						      <option>Boston Housing Prices (Logistic Regression)</option>
+						      <option>EXAMPLE MODEL 2</option>
+						    </select>
+						 </div>
+						 <hr>
+		      		</div>
+
+		      		<div class="col-sm-3">
+						<div class="form-group">
+						    <label class="m-0 p-0" for="CHAS" width="50%">Bounds Charles River</label>
+						    <select class="form-control w-50" id="CHAS">
+						      <option>YES</option>
+						      <option>NO</option>
+						    </select>
+						</div>
+						<div class="form-group">
+						    <label class="m-0 p-0" for="CRIM" width="50%">Per capita crime rate by town: </label> 
+						    <span class="font-weight-bold" id="CRIM-value">0.5</span>
+						    <input class="custom-range" type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="CRIM"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="ZN" width="50%">Residential land in large lots: </label>
+						    <span class="font-weight-bold" id="ZN-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="ZN"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="AGE" width="50%">Proportion old owner-owned units: </label>
+						    <span class="font-weight-bold" id="AGE-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="AGE"></input>
+						 </div>
 					</div>
 
-					<div class="col-sm-12 col-md-5 drop-indicator text-center my-auto" id="regression-bar-chart">		
+					<div class="col-sm-3 select-offset">
+						<!--br><br><br-->
+						<div class="form-group">
+							
+						    <label class="m-0 p-0" for="DIS" width="50%">Distances employment centers: </label>
+						    <span class="font-weight-bold" id="DIS-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="DIS"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="RAD" width="50%">Accessibility to radial highways: </label>
+						    <span class="font-weight-bold" id="RAD-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="RAD"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="TAX" width="50%">Full-value property-tax rate: </label>
+						    <span class="font-weight-bold" id="TAX-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="TAX"></input>
+						 </div>
+					</div>
+
+					<div class="col-sm-3 select-offset">
+						<div class="form-group">
+							
+						    <label class="m-0 p-0" for="INDUS" width="50%">Non-retail business acres: </label>
+						    <span class="font-weight-bold" id="INDUS-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="INDUS"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="NOX" width="50%">Nitric oxides concentration: </label>
+						    <span class="font-weight-bold" id="NOX-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="NOX"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="RM" width="50%">Average number of rooms: </label>
+						    <span class="font-weight-bold" id="RM-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="RM"></input>
+						 </div>
+
+					</div>
+
+					<div class="col-sm-3 select-offset">
+						<div class="form-group">
+							
+						    <label class="m-0 p-0" for="PTRATIO" width="50%">Pupil-teacher ratio by town: </label>
+						    <span class="font-weight-bold" id="PTRATIO-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="PTRATIO"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="B" width="50%">Proportion of black residents: </label>
+						    <span class="font-weight-bold" id="B-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="B"></input>
+						 </div>
+						 <div class="form-group">
+						    <label class="m-0 p-0" for="LSTAT" width="50%">Percent low income: </label>
+						    <span class="font-weight-bold" id="LSTAT-value">0.5</span>
+						    <input class="custom-range"  type="range" min="0.0" max="1.0" step="0.01" class="form-control w-75" id="LSTAT"></input>
+						 </div>
+					</div>
+
+					<div class="col-sm-12 my-0 py-0 text-center"> 
+						<h4 id="regression-prediction">Predicted House Price: </h4>
+					</div> 
+					<div class="col-sm-12 col-md-5 drop-indicator text-center mx-auto" id="regression-bar-chart">		
 					</div>
 				</div>
 		    </div>
