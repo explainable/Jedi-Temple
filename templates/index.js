@@ -187,6 +187,8 @@ function plot_regression() {
       font:{
         family: 'Raleway, sans-serif'
       },
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
       showlegend: false,
       xaxis: {
         tickangle: -45
