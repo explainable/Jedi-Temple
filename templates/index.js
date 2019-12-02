@@ -207,7 +207,7 @@ function plot_regression() {
         prediction += c
     }
 
-    $("#regression-prediction").text("Predicting House Price: $" + prediction.toFixed(2))
+    $("#regression-prediction").text("Predicted House Price: $" + prediction.toFixed(2))
 
     Plotly.newPlot('regression-bar-chart', reg_data, layout);
 }
