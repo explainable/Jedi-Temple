@@ -152,7 +152,21 @@ function plot_regression() {
         "Proportion of black residents",
         "Percent 'lower' status of the population"
     ]
-    let weights = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    let weights = [
+        -0.108,
+        0.046,
+        0.021,
+        2.687,
+        -17.767,
+        3.810,
+        0.001,
+        -1.476,
+        0.306,
+        -0.012,
+        -0.953,
+        0.009,
+        -0.525
+    ]
 
     let chas = 0; 
     if ($("#CHAS option:selected").val() == "YES") chas = 1
@@ -171,19 +185,35 @@ function plot_regression() {
     let lstat = $("#LSTAT").val()
     /* VALIDATE THESE FIRST */
 
-    values = [chas, crim, zn, indus, nox, rm, age, dis, rad, tax, ptratio, b, lstat]
+    values = [crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat]
 
     let contributions = []
     for (let i=0; i < weights.length; i++) {
         contributions.push(values[i] * weights[i])
     }
 
+    const COLORS = [
+        "#F20000", 
+        "#059BBB", 
+        "#059BBB", 
+        "#059BBB", 
+        "#F20000", 
+        "#059BBB", 
+        "#059BBB", 
+        "#F20000", 
+        "#059BBB", 
+        "#F20000", 
+        "#F20000", 
+        "#059BBB", 
+        "#F20000"
+    ]
+
     var reg_data = [{
       x: reg_features,
       y: contributions,
       type: 'bar',
       text: reg_descriptions,
-      marker: {color: "#059BBB"},
+      marker: {color: COLORS},
     }];
 
     var layout = {
@@ -210,7 +240,8 @@ function plot_regression() {
     for (let c of contributions) {
         prediction += c
     }
-
+    prediction += 36.45948838508994 // bias
+    prediction *= 1000 // scaling per dataset
     $("#regression-prediction").text("Predicted House Price: $" + prediction.toFixed(2))
 
     Plotly.newPlot('regression-bar-chart', reg_data, layout);
