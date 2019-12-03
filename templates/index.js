@@ -94,7 +94,7 @@ $(document).ready(function() {
 
     plot_regression()
 
-    /* For adding navbar shadow on scroll ... remove the class from html first
+    /* For adding navbar shadow on scroll ... remove the class from html first */
     $(window).scroll(function() {     
       var scroll = $(window).scrollTop();
       if (scroll > 100) {
@@ -103,7 +103,9 @@ $(document).ready(function() {
       else {
           $(".navbar").removeClass("navbar-shadow");
       }
-    }); */
+    }); /* */
+
+
     /* Update slider text */
     $("#CRIM").on("change", (e) => {$("#CRIM-value").text($("#CRIM").val()); plot_regression()})
     $("#ZN").on("change", (e) => {$("#ZN-value").text($("#ZN").val()); plot_regression()})

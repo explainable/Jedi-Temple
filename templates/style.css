@@ -21,18 +21,20 @@ font-family: 'Ubuntu', sans-serif;
 
 /*--- navigation bar ---*/
 .navbar {
-  background:#273054;
+  /*background:#273054;*/
+  background: linear-gradient(to right, #037aaa, #059BBB);
+
 }
 .nav-link,
 .navbar-brand {
-  color: #059BBB;
+  color: #ffffff;
   cursor: pointer;
 }
 .nav-link {
   /*margin-right: 1em !important;*/
 }
 .nav-link:hover {
-  color: #dddddd;
+  color: #273054;
   /*color: #979797;*/
 }
 .navbar-collapse {
