@@ -151,6 +151,7 @@ font-family: 'Ubuntu', sans-serif;
 	padding: 70px;
 	font-size: 20px;
 	margin: 20px;
+  border-radius: 10px;
 }
 
 .hidden {
