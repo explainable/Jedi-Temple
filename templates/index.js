@@ -25,11 +25,7 @@ $(document).ready(function() {
                 originalURL = response.original.replace("templates", "")
                 heatmapURL = response.heatmap.replace("templates", "")
                 prediction = response.prediction
-                $("#original-display").attr("src", originalURL)
-                $("#heatmap-display").attr("src", heatmapURL)
-                $("#image-model-prediction").text("Model Prediction: " + prediction)
-                $("#heatmaps").removeClass("hidden")
-                $("#heatmap-separator").removeClass("hidden")
+                show_heatmaps(originalURL, heatmapURL, prediction)
             } else if (http.readyState == 4) {
                 stop_loading_modal()
                 alert("Error processing image: " + http.responseText)
@@ -121,7 +117,57 @@ $(document).ready(function() {
     $("#LSTAT").on("change", (e) => {$("#LSTAT-value").text($("#LSTAT").val()); plot_regression()})
     $("#CHAS").on("change", (e) => {plot_regression()})
     $(window).resize(function(){plot_regression()}) /* keeps plot centered and appropriately sized */
+
+    $(".0-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/0.png", "/img/0_heatmap.png", "0")
+    })
+    $(".1-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/1.png", "/img/1_heatmap.png", "1")
+    })
+    $(".2-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/2.png", "/img/2_heatmap.png", "2")
+    })
+    $(".3-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/3.png", "/img/3_heatmap.png", "3")
+    })
+    $(".4-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/4.png", "/img/4_heatmap.png", "4")
+    })
+    $(".5-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/5.png", "/img/5_heatmap.png", "5")
+    })
+    $(".6-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/6.png", "/img/6_heatmap.png", "6")
+    })
+    $(".7-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/7.png", "/img/7_heatmap.png", "7")
+    })
+    $(".8-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/8.png", "/img/8_heatmap.png", "8")
+    })
+    $(".9-example").on("click", (e) => {
+        e.preventDefault()
+        show_heatmaps("/img/9.png", "/img/9_heatmap.png", "9")
+    })
+
 })
+
+function show_heatmaps(originalURL, heatmapURL, prediction) {
+    $("#original-display").attr("src", originalURL)
+    $("#heatmap-display").attr("src", heatmapURL)
+    $("#image-model-prediction").text("Model Prediction: " + prediction)
+    $("#heatmaps").removeClass("hidden")
+    $("#heatmap-separator").removeClass("hidden")
+}
 
 function plot_regression() {
     let reg_features = [
