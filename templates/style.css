@@ -14,7 +14,7 @@ html, body {
 body {
   background: linear-gradient(to right, #dddddd, #ffffff);
   /* fonts */
-font-family: 'Ubuntu', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 
