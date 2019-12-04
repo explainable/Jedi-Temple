@@ -158,7 +158,6 @@ $(document).ready(function() {
         e.preventDefault()
         show_heatmaps("/img/9.png", "/img/9_heatmap.png", "9")
     })
-
 })
 
 function show_heatmaps(originalURL, heatmapURL, prediction) {
