@@ -43,9 +43,17 @@ models = {
 }
 
 @app.route('/')
-def hello():
-    #name = request.args.get("name", "World")
+def home():
     return render_template('index.html')
+
+@app.route('/how-it-works')
+def works():
+    return render_template('works.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 # TODO Make this random
 def random_thing():
