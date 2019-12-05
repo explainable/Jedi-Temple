@@ -1,7 +1,9 @@
 from flask import Flask, escape, request, jsonify, render_template, send_file
+import json
 from werkzeug.utils import secure_filename
 import os
 from mnist_cnn import get_info
+from titanic import classify
 
 UPLOAD_FOLDER = 'uploaded_images';
 ALLOWED_EXTENSIONS = {'png'}
@@ -23,20 +25,21 @@ def is_picture(data):
     return True
 
 def is_word_data(data):
-    return data == '2'
+    return not data == "invalid_data"
 
 def pic_model_1(data):
     return get_info(data)
 
 def word_model_1(data):
-    return "The house should cost one million dollars"
+    return classify(data)
 
-WORD = 0
+TABULAR = 0
 PICTURE = 1
 
 models = {
     "PICTURE_MODEL1": (PICTURE, pic_model_1),
-    "WORD_MODEL1"   : (WORD, word_model_1)
+    "TITANIC_TREE"  : (TABULAR, word_model_1),
+    "WORD_MODEL1"   : (TABULAR, word_model_1)
 }
 
 @app.route('/')
@@ -55,10 +58,19 @@ def mlmodel():
     if which_model not in models:
         return '', 418
     (model_type, model_func) = models[which_model]
-    if model_type == WORD:
-        image_file = args.get("data", "invalid_data")
-        if not is_word_data(test_data):
+    if model_type == TABULAR:
+        form = request.form
+        vector = json.loads(form["features"])
+        print(vector)
+        #vector = args.get("data", "invalid_data")
+        if not is_word_data(vector):
             return '', 400
+        if vector:
+            (nodeID, alive_percent) = model_func(vector)
+            return jsonify({
+                "label": nodeID,
+                "alive_percent": alive_percent
+            })
     if model_type == PICTURE:
         image_file = request.files['pic']
         if not is_picture(image_file):
