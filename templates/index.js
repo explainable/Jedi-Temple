@@ -1,5 +1,6 @@
 var currentImageModel = "PICTURE_MODEL1"
-var lastTreePrediction = true
+var currentClassificationModel = "TITANIC_TREE"
+var lastTreePrediction = "Alive"
 var lastTreePredictionNode = "Abel"
 
 $(document).ready(function() {
@@ -98,7 +99,7 @@ $(document).ready(function() {
     /* For adding navbar shadow on scroll ... remove the class from html first */
     $(window).scroll(function() {     
       var scroll = $(window).scrollTop();
-      if (scroll > 100) {
+      if (scroll > 60) {
           $(".navbar").addClass("navbar-shadow");
       }
       else {
@@ -311,6 +312,7 @@ function plot_regression() {
 function plot_decision_tree(shouldQuery) {
     let result = ""
     let node = ""
+    const DEFAULT_NODE = "3: Siblings/Spouses Aboard<=2.5"
 
     if (shouldQuery) { // query new result 
         let pclass = parseInt($("#PCLASS option:selected").val())
@@ -327,36 +329,71 @@ function plot_decision_tree(shouldQuery) {
 
         let values = [pclass, sex, age, spouses, children, fare] // same order as csv
 
-        result = "Kept Alive"
-        node = "Abel"
-        lastTreePrediction = result
-        lastTreePredictionNode = node
+        let URL = "/mlmodel?model=" + currentClassificationModel
+        var http = new XMLHttpRequest()
+        http.open("POST", URL, true)
+        http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        http.onreadystatechange = () => {
+            if (http.readyState == 4 && http.status == 200) {
+                response = JSON.parse(http.responseText)
+                if (parseFloat(response.alive_percent) >= .5) {
+                    result = "Alive"
+                } else {
+                    result = "Dead"
+                }
+                
+                node = response.label // node label in tree
+                lastTreePrediction = result
+                lastTreePredictionNode = node
 
-        render_decision_tree_plot(result, node)
+                render_decision_tree_plot(result, node)
+            } else if (http.readyState == 4) {
+                console.error(http.responseText)
+                render_decision_tree_plot(lastTreePrediction, DEFAULT_NODE)
+            }
+        }
+        http.send("features=" + JSON.stringify(values))
     } else {
-        result = lastTreePrediction
-        node = lastTreePredictionNode
-        render_decision_tree_plot(result, node)
+        render_decision_tree_plot(lastTreePrediction, lastTreePredictionNode)
     }
 }
 
 function render_decision_tree_plot(result, node) {
     $("#decision-tree-prediction").text("Prediction: " + result)
 
-    nodes = ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
+    // ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
+    // ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ]
+
+    let nodes = ['Everyone', '1: Sex<=0.5', '26: Sex>0.5', '2: Age<=13.0', '13: Age>13.0', '3: Siblings/Spouses Aboard<=2.5', '8: Siblings/Spouses Aboard>2.5', '4: Parents/Children Aboard<=0.5', '7: Parents/Children Aboard>0.5', '5: Fare<=15.014600276947021', '6: Fare>15.014600276947021', '9: Age<=3.5', '12: Age>3.5', '10: Age<=2.5', '11: Age>2.5', '14: Fare<=26.268750190734863', '21: Fare>26.268750190734863', '15: Age<=32.5', '18: Age>32.5', '16: Age<=30.75', '17: Age>30.75', '19: Fare<=7.910400152206421', '20: Fare>7.910400152206421', '22: Fare<=26.46875', '23: Fare>26.46875', '24: Age<=24.5', '25: Age>24.5', '27: Pclass<=2.5', '38: Pclass>2.5', '28: Age<=2.5', '31: Age>2.5', '29: Pclass<=1.5', '30: Pclass>1.5', '32: Fare<=28.856249809265137', '35: Fare>28.856249809265137', '33: Fare<=28.231249809265137', '34: Fare>28.231249809265137', '36: Parents/Children Aboard<=1.5', '37: Parents/Children Aboard>1.5', '39: Fare<=23.350000381469727', '46: Fare>23.350000381469727', '40: Age<=36.5', '43: Age>36.5', '41: Age<=32.5', '42: Age>32.5', '44: Age<=62.5', '45: Age>62.5', '47: Parents/Children Aboard<=0.5', '48: Parents/Children Aboard>0.5', '49: Fare<=31.331250190734863', '50: Fare>31.331250190734863']
+    let parents =  ['', '', '', '1: Sex<=0.5', '1: Sex<=0.5', '2: Age<=13.0', '2: Age<=13.0', '3: Siblings/Spouses Aboard<=2.5', '3: Siblings/Spouses Aboard<=2.5', '4: Parents/Children Aboard<=0.5', '4: Parents/Children Aboard<=0.5', '8: Siblings/Spouses Aboard>2.5', '8: Siblings/Spouses Aboard>2.5', '9: Age<=3.5', '9: Age<=3.5', '13: Age>13.0', '13: Age>13.0', '14: Fare<=26.268750190734863', '14: Fare<=26.268750190734863', '15: Age<=32.5', '15: Age<=32.5', '18: Age>32.5', '18: Age>32.5', '21: Fare>26.268750190734863', '21: Fare>26.268750190734863', '23: Fare>26.46875', '23: Fare>26.46875', '26: Sex>0.5', '26: Sex>0.5', '27: Pclass<=2.5', '27: Pclass<=2.5', '28: Age<=2.5', '28: Age<=2.5', '31: Age>2.5', '31: Age>2.5', '32: Fare<=28.856249809265137', '32: Fare<=28.856249809265137', '35: Fare>28.856249809265137', '35: Fare>28.856249809265137', '38: Pclass>2.5', '38: Pclass>2.5', '39: Fare<=23.350000381469727', '39: Fare<=23.350000381469727', '40: Age<=36.5', '40: Age<=36.5', '43: Age>36.5', '43: Age>36.5', '46: Fare>23.350000381469727', '46: Fare>23.350000381469727', '48: Parents/Children Aboard>0.5', '48: Parents/Children Aboard>0.5']
+    let values = ['Dead = 65%, Live = 34%', 'Dead = 95%, Live = 4%', 'Dead = 11%, Live = 88%', 'Dead = 43%, Live = 56%', 'Dead = 99%, Live = 0%', 'Dead = 4%, Live = 95%', 'Dead = 94%, Live = 5%', 'Dead = 50%, Live = 50%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 83%, Live = 16%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 97%, Live = 2%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 1%, Live = 98%', 'Dead = 24%, Live = 75%', 'Dead = 50%, Live = 50%', 'Dead = 0%, Live = 99%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 1%, Live = 98%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 7%, Live = 92%', 'Dead = 96%, Live = 3%', 'Dead = 0%, Live = 100%', 'Dead = 90%, Live = 10%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%']
+
     colors = []
     for (let n of nodes) {
-        if (n == node) {
+        if (n.startsWith(node)) {
             colors.push("#059BBB")
         } else {
             colors.push("rgba(250,76,5,.5)")
         }
     }
 
+    // TODO: should just have nodes and parents in this form for future work
+    name_mapping = {}
+    for (let i=0; i < values.length; i++) {
+        let oldName = nodes[i]
+        let appendString = " | " + values[i]
+        let newName = oldName + appendString
+        nodes[i] = newName
+        name_mapping[oldName] = newName
+    }
+    for (let i=0; i < parents.length; i++) {
+        parents[i] = name_mapping[parents[i]]
+    }
+
     data = [{
           type: "treemap",
           labels: nodes,
-          parents: ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
+          parents: parents,
           marker: {colors: colors}
     }]
 
