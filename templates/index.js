@@ -1,4 +1,6 @@
 var currentImageModel = "PICTURE_MODEL1"
+var lastTreePrediction = true
+var lastTreePredictionNode = "Abel"
 
 $(document).ready(function() {
     $("#image-upload").submit(function(e) {
@@ -89,6 +91,9 @@ $(document).ready(function() {
     )
 
     plot_regression()
+    plot_decision_tree(true)
+    $(window).resize(function(){plot_regression(); plot_decision_tree(false)}) /* keeps plot centered and appropriately sized */
+
 
     /* For adding navbar shadow on scroll ... remove the class from html first */
     $(window).scroll(function() {     
@@ -102,7 +107,7 @@ $(document).ready(function() {
     }); /* */
 
 
-    /* Update slider text */
+    /* Update regression on interaction */
     $("#CRIM").on("change", (e) => {$("#CRIM-value").text($("#CRIM").val()); plot_regression()})
     $("#ZN").on("change", (e) => {$("#ZN-value").text($("#ZN").val()); plot_regression()})
     $("#INDUS").on("change", (e) => {$("#INDUS-value").text($("#INDUS").val()); plot_regression()})
@@ -116,8 +121,17 @@ $(document).ready(function() {
     $("#B").on("change", (e) => {$("#B-value").text($("#B").val()); plot_regression()})
     $("#LSTAT").on("change", (e) => {$("#LSTAT-value").text($("#LSTAT").val()); plot_regression()})
     $("#CHAS").on("change", (e) => {plot_regression()})
-    $(window).resize(function(){plot_regression()}) /* keeps plot centered and appropriately sized */
 
+    /* Update decision tree on interaction */
+    $("#P-AGE").on("change", (e) => {$("#P-AGE-value").text($("#P-AGE").val()); plot_decision_tree(true)})
+    $("#FARE").on("change", (e) => {$("#FARE-value").text($("#FARE").val()); plot_decision_tree(true)})
+    $("#PCLASS").on("change", (e) => {plot_decision_tree(true)})
+    $("#SPOUSES").on("change", (e) => {plot_decision_tree(true)})
+    $("#SEX").on("change", (e) => {plot_decision_tree(true)})
+    $("#CHILDREN").on("change", (e) => {plot_decision_tree(true)})
+
+
+    /* load example heatmaps on click */
     $(".0-example").on("click", (e) => {
         e.preventDefault()
         show_heatmaps("/img/0.png", "/img/0_heatmap.png", "0")
@@ -293,3 +307,74 @@ function plot_regression() {
 
     Plotly.newPlot('regression-bar-chart', reg_data, layout);
 }
+
+function plot_decision_tree(shouldQuery) {
+    let result = ""
+    let node = ""
+
+    if (shouldQuery) { // query new result 
+        let pclass = parseInt($("#PCLASS option:selected").val())
+        let spouses = parseInt($("#SPOUSES option:selected").val()) 
+        let sex = $("#SEX option:selected").val()
+        if (sex == "MALE") {
+            sex = 0
+        } else {
+            sex = 1
+        }
+        let children = parseInt($("#CHILDREN  option:selected").val())
+        let fare = $("#FARE").val()
+        let age = $("#P-AGE").val()
+
+        let values = [pclass, sex, age, spouses, children, fare] // same order as csv
+
+        result = "Kept Alive"
+        node = "Abel"
+        lastTreePrediction = result
+        lastTreePredictionNode = node
+
+        render_decision_tree_plot(result, node)
+    } else {
+        result = lastTreePrediction
+        node = lastTreePredictionNode
+        render_decision_tree_plot(result, node)
+    }
+}
+
+function render_decision_tree_plot(result, node) {
+    $("#decision-tree-prediction").text("Prediction: " + result)
+
+    nodes = ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
+    colors = []
+    for (let n of nodes) {
+        if (n == node) {
+            colors.push("#059BBB")
+        } else {
+            colors.push("rgba(250,76,5,.5)")
+        }
+    }
+
+    data = [{
+          type: "treemap",
+          labels: nodes,
+          parents: ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
+          marker: {colors: colors}
+    }]
+
+    var layout = {
+      title: 'Decision Hierarchy',
+      font:{
+        family: 'Raleway, sans-serif'
+      },
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
+    };
+
+    Plotly.newPlot('decision-tree-chart', data, layout)
+}
+
+
+
+
+
+
+

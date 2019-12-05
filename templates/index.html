@@ -237,7 +237,6 @@
 	</section>
 
 	<section class="page-section container-fluid" id="regression-section">
-			
 		<div class="col-12 my-5">
 	    <div class="card border-left-info shadow h-100 py-2">
 		    <div class="card-body" id="image-dropzone">
@@ -341,13 +340,101 @@
 					<div class="col-sm-12 my-0 py-0 text-center"> 
 						<h4 id="regression-prediction">Predicted House Price: </h4>
 					</div> 
-					<div class="col-sm-12 col-md-5 drop-indicator text-center mx-auto" id="regression-bar-chart">		
+					<div class="col-sm-12 col-md-5 text-center mx-auto" id="regression-bar-chart">		
 					</div>
 				</div>
 		    </div>
 		</div>
-		
 	</section>
+
+
+
+	<section class="page-section container-fluid" id="tree-section">
+		<div class="col-12 my-5">
+	    <div class="card border-left-info shadow h-100 py-2">
+		    <div class="card-body" id="image-dropzone">
+		      	<h2>Classification</h2>
+		      	<div class="row">
+		      		<div class="col-12">
+						<div class="form-group">
+						    <label for="regression-model-selector" width="50%">Model Selector</label>
+						    <select class="form-control w-25" id="regression-model-selector">
+						      <option>Titanic: Dead or Alive? (Decision Tree)</option>
+						      <option>EXAMPLE MODEL 2</option>
+						    </select>
+						 </div>
+						 <hr>
+		      		</div>
+
+		      		<div class="col-sm-6 col-md-2">
+						<div class="form-group">
+						    <label class="m-0 p-0" for="PCLASS" width="50%">Class</label>
+						    <select class="form-control w-75" id="PCLASS">
+						      <option>1st</option>
+						      <option>2nd</option>
+						      <option>3rd</option>
+						    </select>
+						</div>
+
+						<div class="form-group">
+						    <label class="m-0 p-0" for="SPOUSES" width="50%">Siblings/Spouses Aboard</label>
+						    <select class="form-control w-75" id="SPOUSES">
+						      <option>0</option>
+						      <option>1</option>
+						      <option>2</option>
+						      <option>3</option>
+						      <option>4</option>
+						      <option>5</option>
+						    </select>
+						</div>
+
+						<div class="form-group my-2">
+						    	<label for="P-AGE">Age: </label>
+						    	<span class="font-weight-bold" id="P-AGE-value">50</span>
+						    	<input class="custom-range"  type="range" min="0" max="100" step="1" class="form-control w-75" id="P-AGE"></input>
+						</div>
+						<div class="form-group my-2">
+						    <label for="FARE">Fare Paid: </label>
+						    <span class="font-weight-bold" id="FARE-value">152</span>
+						    <input class="custom-range"  type="range" min="5" max="299" step="0.01" class="form-control w-75" id="FARE"></input>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-2 mb-4">
+						<div class="form-group">
+						    <label class="m-0 p-0" for="SEX" width="50%">Sex</label>
+						    <select class="form-control w-75" id="SEX">
+						      <option>MALE</option>
+						      <option>FEMALE</option>
+						    </select>
+						</div>
+						<div class="form-group">
+						    <label class="m-0 p-0" for="CHILDREN" width="50%">Parents/Children Aboard</label>
+						    <select class="form-control w-75" id="CHILDREN">
+						      <option>0</option>
+						      <option>1</option>
+						      <option>2</option>
+						      <option>3</option>
+						      <option>4</option>
+						      <option>5</option>
+						    </select>
+						</div>
+
+						
+					</div>
+
+
+					<div class="col-sm-12 col-md-8 my-0 py-0 my-auto text-center"> 
+						<h4 id="decision-tree-prediction">Prediction: </h4>
+						<div class="drop-indicator text-center mx-auto" id="decision-tree-chart">		
+						</div>
+					</div> 
+					
+				</div>
+		    </div>
+		</div>
+	</section>
+
 
 
 
