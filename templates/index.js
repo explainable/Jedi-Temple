@@ -365,8 +365,16 @@ function render_decision_tree_plot(result, node) {
     let values = ['Dead = 65%, Live = 34%', 'Dead = 95%, Live = 4%', 'Dead = 11%, Live = 88%', 'Dead = 43%, Live = 56%', 'Dead = 99%, Live = 0%', 'Dead = 4%, Live = 95%', 'Dead = 94%, Live = 5%', 'Dead = 50%, Live = 50%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 83%, Live = 16%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 97%, Live = 2%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 1%, Live = 98%', 'Dead = 24%, Live = 75%', 'Dead = 50%, Live = 50%', 'Dead = 0%, Live = 99%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 1%, Live = 98%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 7%, Live = 92%', 'Dead = 96%, Live = 3%', 'Dead = 0%, Live = 100%', 'Dead = 90%, Live = 10%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 0%, Live = 100%', 'Dead = 0%, Live = 100%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%', 'Dead = 100%, Live = 0%']
 
     colors = []
+
+    // HACKY SHIT WHILE AIDAN FIXES HIS CODE
+    let query = node
+    while ((query[query.length - 2] != "." && query[query.length - 1] == 0)) {
+        query = query.slice(0, query.length - 1)
+    }
+    // 
+
     for (let n of nodes) {
-        if (n.startsWith(node)) {
+        if (n.startsWith(query)) {
             colors.push("#059BBB")
         } else {
             colors.push("rgba(250,76,5,.35)")
