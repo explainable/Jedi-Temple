@@ -6,7 +6,7 @@ clf, feat_names, pred_labels, deciPath = tab.treeTitanic(tit_depth)
 
 def classify(vector):
     np_vector = np.array(vector).reshape(1, -1)
-    node = tab.getNode(np_vector, clf, deciPath, feat_names)
+    node = tab.getNode(vector, clf, deciPath, feat_names)
     al_per = clf.predict_proba(np_vector)
     return (node, al_per[0, 1])
 
