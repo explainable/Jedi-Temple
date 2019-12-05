@@ -1,7 +1,7 @@
 var currentImageModel = "PICTURE_MODEL1"
 var currentClassificationModel = "TITANIC_TREE"
 var lastTreePrediction = "Alive"
-var lastTreePredictionNode = "Abel"
+var lastTreePredictionNode = "7"
 
 $(document).ready(function() {
     $("#image-upload").submit(function(e) {
@@ -312,7 +312,6 @@ function plot_regression() {
 function plot_decision_tree(shouldQuery) {
     let result = ""
     let node = ""
-    const DEFAULT_NODE = "3: Siblings/Spouses Aboard<=2.5"
 
     if (shouldQuery) { // query new result 
         let pclass = parseInt($("#PCLASS option:selected").val())
@@ -349,7 +348,7 @@ function plot_decision_tree(shouldQuery) {
                 render_decision_tree_plot(result, node)
             } else if (http.readyState == 4) {
                 console.error(http.responseText)
-                render_decision_tree_plot(lastTreePrediction, DEFAULT_NODE)
+                render_decision_tree_plot(lastTreePrediction, lastTreePredictionNode)
             }
         }
         http.send("features=" + JSON.stringify(values))
@@ -360,9 +359,6 @@ function plot_decision_tree(shouldQuery) {
 
 function render_decision_tree_plot(result, node) {
     $("#decision-tree-prediction").text("Prediction: " + result)
-
-    // ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
-    // ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ]
 
     let nodes = ['Everyone', '1: Sex<=0.5', '26: Sex>0.5', '2: Age<=13.0', '13: Age>13.0', '3: Siblings/Spouses Aboard<=2.5', '8: Siblings/Spouses Aboard>2.5', '4: Parents/Children Aboard<=0.5', '7: Parents/Children Aboard>0.5', '5: Fare<=15.014600276947021', '6: Fare>15.014600276947021', '9: Age<=3.5', '12: Age>3.5', '10: Age<=2.5', '11: Age>2.5', '14: Fare<=26.268750190734863', '21: Fare>26.268750190734863', '15: Age<=32.5', '18: Age>32.5', '16: Age<=30.75', '17: Age>30.75', '19: Fare<=7.910400152206421', '20: Fare>7.910400152206421', '22: Fare<=26.46875', '23: Fare>26.46875', '24: Age<=24.5', '25: Age>24.5', '27: Pclass<=2.5', '38: Pclass>2.5', '28: Age<=2.5', '31: Age>2.5', '29: Pclass<=1.5', '30: Pclass>1.5', '32: Fare<=28.856249809265137', '35: Fare>28.856249809265137', '33: Fare<=28.231249809265137', '34: Fare>28.231249809265137', '36: Parents/Children Aboard<=1.5', '37: Parents/Children Aboard>1.5', '39: Fare<=23.350000381469727', '46: Fare>23.350000381469727', '40: Age<=36.5', '43: Age>36.5', '41: Age<=32.5', '42: Age>32.5', '44: Age<=62.5', '45: Age>62.5', '47: Parents/Children Aboard<=0.5', '48: Parents/Children Aboard>0.5', '49: Fare<=31.331250190734863', '50: Fare>31.331250190734863']
     let parents =  ['', '', '', '1: Sex<=0.5', '1: Sex<=0.5', '2: Age<=13.0', '2: Age<=13.0', '3: Siblings/Spouses Aboard<=2.5', '3: Siblings/Spouses Aboard<=2.5', '4: Parents/Children Aboard<=0.5', '4: Parents/Children Aboard<=0.5', '8: Siblings/Spouses Aboard>2.5', '8: Siblings/Spouses Aboard>2.5', '9: Age<=3.5', '9: Age<=3.5', '13: Age>13.0', '13: Age>13.0', '14: Fare<=26.268750190734863', '14: Fare<=26.268750190734863', '15: Age<=32.5', '15: Age<=32.5', '18: Age>32.5', '18: Age>32.5', '21: Fare>26.268750190734863', '21: Fare>26.268750190734863', '23: Fare>26.46875', '23: Fare>26.46875', '26: Sex>0.5', '26: Sex>0.5', '27: Pclass<=2.5', '27: Pclass<=2.5', '28: Age<=2.5', '28: Age<=2.5', '31: Age>2.5', '31: Age>2.5', '32: Fare<=28.856249809265137', '32: Fare<=28.856249809265137', '35: Fare>28.856249809265137', '35: Fare>28.856249809265137', '38: Pclass>2.5', '38: Pclass>2.5', '39: Fare<=23.350000381469727', '39: Fare<=23.350000381469727', '40: Age<=36.5', '40: Age<=36.5', '43: Age>36.5', '43: Age>36.5', '46: Fare>23.350000381469727', '46: Fare>23.350000381469727', '48: Parents/Children Aboard>0.5', '48: Parents/Children Aboard>0.5']
