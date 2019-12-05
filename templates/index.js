@@ -31,7 +31,7 @@ $(document).ready(function() {
                 show_heatmaps(originalURL, heatmapURL, prediction)
             } else if (http.readyState == 4) {
                 stop_loading_modal()
-                alert("Error processing image: " + http.responseText)
+                alert("Error processing image: Invalid Image")// + http.responseText)
             }
         }
         http.send(form_data)
@@ -323,8 +323,8 @@ function plot_decision_tree(shouldQuery) {
             sex = 1
         }
         let children = parseInt($("#CHILDREN  option:selected").val())
-        let fare = $("#FARE").val()
-        let age = $("#P-AGE").val()
+        let fare = parseFloat($("#FARE").val())
+        let age = parseInt($("#P-AGE").val())
 
         let values = [pclass, sex, age, spouses, children, fare] // same order as csv
 
@@ -369,7 +369,7 @@ function render_decision_tree_plot(result, node) {
         if (n.startsWith(node)) {
             colors.push("#059BBB")
         } else {
-            colors.push("rgba(250,76,5,.5)")
+            colors.push("rgba(250,76,5,.35)")
         }
     }
 
