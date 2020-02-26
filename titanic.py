@@ -1,8 +1,7 @@
 import tabular as tab
 import numpy as np
 
-tit_depth = 5
-clf, feat_names, pred_labels, deciPath = tab.treeTitanic(tit_depth)
+clf, feat_names, deciPath = tab.loadTitanicTree()
 
 def classify(vector):
     np_vector = np.array(vector).reshape(1, -1)
