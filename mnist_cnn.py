@@ -5,7 +5,7 @@ from PIL import Image
 def gen_heatmap(model, image, filename, adv=False):
     target = np.argmax(model.predict(image.reshape(1, 28, 28, 1)))
     print(target)
-    misses = np.zeros((28,28), dtype="float32")
+    misses = np.zeros((28, 28), dtype="float32")
     gen = ip.GrayscalePerturbator(image, grid_dimen=1, stride=1, stride_scale=1, cutoff_dimen=28, is_adversarial=adv)
     for pert in gen:
         label = np.argmax(model.predict(pert.reshape(1, 28, 28, 1)))

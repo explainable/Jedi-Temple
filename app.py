@@ -1,18 +1,18 @@
-from flask import Flask, escape, request, jsonify, render_template, send_file
-import json
-from werkzeug.utils import secure_filename
 import os
+import json
+from flask import Flask, request, jsonify, render_template
+from werkzeug.utils import secure_filename
 from mnist_cnn import get_info
 from titanic import classify
 
-UPLOAD_FOLDER = 'uploaded_images';
+UPLOAD_FOLDER = 'uploaded_images'
 ALLOWED_EXTENSIONS = {'png'}
 
 app = Flask(__name__,
-    static_url_path='', 
-    static_folder='templates', # should this have a different name?
-    #template_folder='web/templates'    ) # do we want templates?
-)
+            static_url_path='',
+            static_folder='templates', # should this have a different name?
+            #template_folder='web/templates') # do we want templates?
+            )
 
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -59,7 +59,7 @@ def about():
 def random_thing():
     return "128"
 
-@app.route('/mlmodel', methods = ['POST'])
+@app.route('/mlmodel', methods=['POST'])
 def mlmodel():
     args = request.args
     which_model = args.get("model", "PICTURE_MODEL1")
@@ -92,10 +92,10 @@ def mlmodel():
             ret_file, prediction = model_func(filepath)
             #return send_file(ret_file)
             return jsonify({
-                "original": filepath, 
+                "original": filepath,
                 "heatmap": ret_file,
                 "prediction": str(prediction)
             })
 
         return '', 402
-    return model_func(test_data), 200
+    return "", 404
